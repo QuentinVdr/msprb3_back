@@ -1,5 +1,7 @@
 import express from 'express';
+import type { ArticleType } from './type/ArticleType';
 import type { UserType } from './type/UserType';
+import { defaultArticles } from './value/article';
 import { defaultPlants } from './value/plants';
 import { defaultUsers } from './value/users';
 export const app = express();
@@ -59,6 +61,29 @@ app.put('/users/:id', (req, res) => {
 app.delete('/users/:id', (req, res) => {
   users = users.filter((user) => user.id !== parseInt(req.params.id));
   res.json({ message: 'User deleted' });
+});
+
+let articles: ArticleType[] = [...defaultArticles];
+
+app.get('/articles', (req, res) => {
+  res.json(articles);
+});
+
+app.post('/articles', (req, res) => {
+  const newArticle = req.body;
+  articles.push(newArticle);
+  res.json(newArticle);
+});
+
+app.put('/articles/:id', (req, res) => {
+  const updatedArticle = req.body;
+  articles = articles.map((article) => (article.id === parseInt(req.params.id) ? updatedArticle : article));
+  res.json(updatedArticle);
+});
+
+app.delete('/articles/:id', (req, res) => {
+  articles = articles.filter((article) => article.id !== parseInt(req.params.id));
+  res.json({ message: 'Article deleted' });
 });
 
 app.listen(3000, () => console.log('Server running on port 3000'));
