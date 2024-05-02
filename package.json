@@ -3,8 +3,10 @@
     "express": "^4.19.2"
   },
   "name": "msprb3_back",
-  "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "src/main.ts"
+  },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
     "@types/bun": "latest",
