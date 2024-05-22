@@ -5,7 +5,7 @@
   "name": "msprb3_back",
   "type": "module",
   "scripts": {
-    "start": "src/main.ts"
+    "start": "bun run src/main.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
