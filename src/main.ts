@@ -1,5 +1,6 @@
 import express from 'express';
 import * as ArticlesController from './controller/ArticlesController';
+import * as MessagesController from './controller/MessagesController';
 import * as PlantsController from './controller/PlantsController';
 import * as UsersController from './controller/UsersController';
 
@@ -25,5 +26,9 @@ app.get('/articles', ArticlesController.getArticles);
 app.post('/articles', ArticlesController.postArticle);
 app.put('/articles/:id', ArticlesController.putArticle);
 app.delete('/articles/:id', ArticlesController.deleteArticle);
+
+// Messages
+app.get('/messages/:id', MessagesController.getMessages);
+app.post('/messages/:id', MessagesController.postMessages);
 
 app.listen(3000, () => console.log('Server running on port 3000'));
