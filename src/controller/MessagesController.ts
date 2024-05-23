@@ -16,7 +16,8 @@ export const getMessages = (req: Request, res: Response) => {
 };
 
 export const postMessages = (req: Request, res: Response) => {
-  const newMessage = req.body;
-  messages.push(newMessage);
+  const newMessage = req.body.message;
+  newMessage.id = messages.length;
+  messages = [...messages, newMessage];
   res.json(newMessage);
 };
