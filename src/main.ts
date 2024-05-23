@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import * as ArticlesController from './controller/ArticlesController';
 import * as MessagesController from './controller/MessagesController';
@@ -6,6 +7,7 @@ import * as UsersController from './controller/UsersController';
 
 export const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Plants
 app.get('/plants', PlantsController.getPlants);
@@ -29,6 +31,6 @@ app.delete('/articles/:id', ArticlesController.deleteArticle);
 
 // Messages
 app.get('/messages/:userId/:otherId', MessagesController.getMessages);
-app.post('/messages/:id', MessagesController.postMessages);
+app.post('/messages', MessagesController.postMessages);
 
 app.listen(3000, () => console.log('Server running on port 3000'));
