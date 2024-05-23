@@ -4,9 +4,13 @@ import type { MessageType } from '../type/MessageType';
 let messages: MessageType[] = [];
 
 export const getMessages = (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId);
+  const otherId = parseInt(req.params.otherId);
   res.json(
     messages.filter(
-      (message) => message.receiver.id === parseInt(req.params.id) || message.sender.id === parseInt(req.params.id)
+      (message) =>
+        (message.receiver.id === userId && message.sender.id === otherId) ||
+        (message.sender.id === userId && message.receiver.id === otherId)
     )
   );
 };

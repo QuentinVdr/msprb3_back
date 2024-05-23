@@ -28,7 +28,7 @@ app.put('/articles/:id', ArticlesController.putArticle);
 app.delete('/articles/:id', ArticlesController.deleteArticle);
 
 // Messages
-app.get('/messages/:id', MessagesController.getMessages);
+app.get('/messages/:userId/:otherId', MessagesController.getMessages);
 app.post('/messages/:id', MessagesController.postMessages);
 
 app.listen(3000, () => console.log('Server running on port 3000'));
