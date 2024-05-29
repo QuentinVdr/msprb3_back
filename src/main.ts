@@ -17,6 +17,7 @@ app.put('/plants/:id', PlantsController.putPlant);
 app.delete('/plants/:id', PlantsController.deletePlant);
 
 // Users
+app.post('/auth', UsersController.isUser);
 app.get('/users', UsersController.getUsers);
 app.get('/users/:id', UsersController.getUserById);
 app.post('/users', UsersController.postUser);

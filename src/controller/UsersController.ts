@@ -4,9 +4,10 @@ import { defaultUsers } from '../value/users';
 
 let users: UserType[] = [...defaultUsers];
 
-export const getUsers = (req: Request, res: Response) => {
-  res.json(users);
-};
+export const isUser = (req: Request, res: Response) =>
+  res.json(users.find((user) => user.mail === req.body.mail && user.password === req.body.password));
+
+export const getUsers = (req: Request, res: Response) => res.json(users);
 
 export const getUserById = (req: Request, res: Response) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
