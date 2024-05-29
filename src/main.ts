@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import * as ArticlesController from './controller/ArticlesController';
-import * as MessagesController from './controller/MessagesController';
+import * as DiscussionController from './controller/DiscussionController';
 import * as PlantsController from './controller/PlantsController';
 import * as UsersController from './controller/UsersController';
 
@@ -30,8 +30,9 @@ app.post('/articles', ArticlesController.postArticle);
 app.put('/articles/:id', ArticlesController.putArticle);
 app.delete('/articles/:id', ArticlesController.deleteArticle);
 
-// Messages
-app.get('/messages/:userId/:otherId', MessagesController.getMessages);
-app.post('/messages', MessagesController.postMessages);
+// discussions
+app.get('/discussions/:userId', DiscussionController.getDiscussionOfUser);
+app.get('/discussions/:userId/:otherId', DiscussionController.getDiscussionBetweenUsers);
+app.post('/discussions/:discussionId/messages', DiscussionController.postMessages);
 
 app.listen(3000, () => console.log('Server running on port 3000'));

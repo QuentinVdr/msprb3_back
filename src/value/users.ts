@@ -29,9 +29,9 @@ export const casualUser: UserType = {
 
 export const casualUser2: UserType = {
   id: 11,
-  firstName: 'userZ',
+  firstName: 'user2',
   lastName: 'casual',
-  mail: 'userZ@mail.com',
+  mail: 'user2@mail.com',
   password: 'user',
   isBotanist: false
 };

@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import type { UserType } from '../type/UserType';
 import { defaultUsers } from '../value/users';
 
-let users: UserType[] = [...defaultUsers];
+export let users: UserType[] = [...defaultUsers];
 
 export const isUser = (req: Request, res: Response) =>
   res.json(users.find((user) => user.mail === req.body.mail && user.password === req.body.password));

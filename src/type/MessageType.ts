@@ -5,5 +5,5 @@ export type MessageType = {
   content: string;
   datetime: Date;
   sender: UserType;
-  receiver: UserType;
+  discussionId: number;
 };
