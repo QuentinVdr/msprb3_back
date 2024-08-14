@@ -41,9 +41,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'My API',
+      title: "Arosa'je API",
       version: '1.0.0',
-      description: 'API documentation for my project'
+      description: "API documentation for Arosa'je"
     },
     servers: [
       {
