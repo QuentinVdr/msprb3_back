@@ -1,5 +1,7 @@
 import cors from 'cors';
 import express from 'express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import * as ArticlesController from './controller/ArticlesController';
 import * as DiscussionController from './controller/DiscussionController';
 import * as PlantsController from './controller/PlantsController';
@@ -34,5 +36,124 @@ app.delete('/articles/:id', ArticlesController.deleteArticle);
 app.get('/discussions/:userId', DiscussionController.getDiscussionOfUser);
 app.get('/discussions/:userId/:otherId', DiscussionController.getDiscussionBetweenUsers);
 app.post('/discussions/:discussionId/messages', DiscussionController.postMessages);
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'My API',
+      version: '1.0.0',
+      description: 'API documentation for my project'
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000'
+      }
+    ],
+    components: {
+      schemas: {
+        Article: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            },
+            title: {
+              type: 'string'
+            },
+            content: {
+              type: 'string'
+            }
+            // Add other properties as needed
+          }
+        },
+        Discussion: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            },
+            members: {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/User'
+              }
+            },
+            messages: {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/Message'
+              }
+            }
+          }
+        },
+        Message: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            },
+            discussionId: {
+              type: 'integer'
+            },
+            content: {
+              type: 'string'
+            }
+            // Add other properties as needed
+          }
+        },
+        User: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            },
+            name: {
+              type: 'string'
+            }
+            // Add other properties as needed
+          }
+        },
+        Plant: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            },
+            name: {
+              type: 'string'
+            },
+            owner: {
+              $ref: '#/components/schemas/User'
+            }
+            // Add other properties as needed
+          }
+        }
+      }
+    }
+  },
+  tags: [
+    {
+      name: 'Articles',
+      description: 'Operations related to articles'
+    },
+    {
+      name: 'Discussions',
+      description: 'Operations related to discussions'
+    },
+    {
+      name: 'Plants',
+      description: 'Operations related to plants'
+    },
+    {
+      name: 'Users',
+      description: 'Operations related to users'
+    }
+  ],
+  apis: ['./src/controller/*.ts'] // Path to the API docs
+};
+
+const specs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(3000, () => console.log('Server running on port 3000'));
